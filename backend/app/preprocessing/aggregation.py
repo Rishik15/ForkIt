@@ -10,12 +10,12 @@ def aggregate_group_preferences(input_json):
     cuisine_counter = Counter()
     for person in group:
         cuisine_counter.update(person["cuisines"])
-    aggregated_cuisines = [cuisine for cuisine, count in cuisine_counter.items() if count / num_people >= 0.3]
+    aggregated_cuisines = [cuisine for cuisine, count in cuisine_counter.items()]
 
     type_counter = Counter()
     for person in group:
         type_counter.update(person["restaurant_types"])
-    aggregated_types = [rtype for rtype, count in type_counter.items() if count / num_people >= 0.3]
+    aggregated_types = [rtype for rtype, count in type_counter.items() if count / num_people >= 0.5]
 
     preference_keys = group[0]["preferences"].keys()
     preference_values = {key: [] for key in preference_keys}

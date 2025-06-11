@@ -29,9 +29,9 @@ def scoring(categorical, tfidf):
     merged_df['Normalized_Reviews'] /= merged_df['Normalized_Reviews'].max()
 
     w_svd = 0.2
-    w_tfidf = 0.5
+    w_tfidf = 0.3
     w_rating = 0.2
-    w_reviews = 0.1
+    w_reviews = 0.3
 
     merged_df['Combined_Score'] = (
                                     w_svd * merged_df['SVD_Similarity'] +

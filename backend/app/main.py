@@ -13,7 +13,6 @@ def recommend():
         result_json = result_df.to_dict(orient='records')
 
         return jsonify({
-            'status': 'success',
             'recommendations': result_json
         })
 
