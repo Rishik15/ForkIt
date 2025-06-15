@@ -33,7 +33,7 @@ export default function CreateForm() {
           <input
             type="range"
             min={0}
-            max={100}
+            max={75}
             value={priority}
             onChange={(e) => setPriority(Number(e.target.value))}
             className="range"
