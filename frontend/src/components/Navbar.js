@@ -1,142 +1,101 @@
 "use client";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-//check if logged in
 import { UserAuth } from "@/context/AuthContext";
-import Image from "next/image";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Navbar() {
-  // Theme
   const { theme, setTheme } = useTheme();
-
-  const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme("black");
-    } else {
-      setTheme("light");
-    }
-  };
-
   const { user, googleSignIn, logOut } = UserAuth();
   const [loading, setLoading] = useState(true);
 
-  const handleSignIn = async () => {
-    try {
-      await googleSignIn();
-    } catch (error) {
-      console.log(error);
-    }
+  const handleToggle = (e) => {
+    setTheme(e.target.checked ? "black" : "light");
   };
 
   const handleSignOut = async () => {
     try {
       await logOut();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    const checkAuthentication = async () => {
+    const checkAuth = async () => {
       await new Promise((resolve) => setTimeout(resolve, 50));
       setLoading(false);
     };
-    checkAuthentication();
+    checkAuth();
   }, [user]);
 
   return (
-    <>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle"
+    <div className="navbar bg-base-100 text-base-content shadow-sm px-4 sm:px-6 lg:px-8">
+      {/* Left: Menu Dropdown */}
+      <div className="navbar-start  space-x-3">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h7"
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/about">About</Link></li>
+          </ul>
+        </div>
+        <div className="text-lg font-bold text-primary">
+          ForkIt
+        </div>
+      </div>
+
+      {/* Right: Theme toggle + Avatar */}
+      <div className="navbar-end flex items-center space-x-5">
+        <label className="cursor-pointer">
+          <input
+            type="checkbox"
+            className="toggle theme-controller"
+            checked={theme === "black"}
+            onChange={handleToggle}
+          />
+        </label>
+
+        {!loading && user && (
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  src={user.photoURL}
+                  alt="User Profile"
+                  className="object-cover"
                 />
-              </svg>
+              </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/">Homepage</Link>
+              <li onClick={handleSignOut}>
+                <a>Logout</a>
               </li>
             </ul>
           </div>
-        </div>
-        <div className="navbar-center"></div>
-
-        <div className="navbar-end">
-          <div
-            tabIndex={0}
-            role="checkbox"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <input
-              type="checkbox"
-              value="black"
-              className="toggle theme-controller m-4"
-              onChange={handleToggle}
-              checked={theme === "black"}
-            />
-          </div>
-
-          
-
-          {loading ? null : user ? (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  {user.photoURL && (
-                    <img
-                      src={user.photoURL}
-                      alt="User Profile"
-                      className="profile-picture"
-                    />
-                  )}
-                </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-              >
-                {/* <li><Link href="/main">Homepage</Link></li>
-                 
-                  <li><a>Settings</a></li> */}
-
-                <li onClick={handleSignOut}>
-                  <a>Logout</a>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }

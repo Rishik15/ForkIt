@@ -18,7 +18,6 @@ export const AuthContextProvider = ({ children }) => {
   const router = useRouter();
 
 
-  //for profile pic
   const [photoURL, setPhotoURL] = useState(null);
 
   const googleSignIn = () => {
