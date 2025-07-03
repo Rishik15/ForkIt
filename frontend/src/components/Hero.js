@@ -3,9 +3,11 @@ import Login from "@/components/Login";
 
 const Hero = () => {
   return (
-    <section className="pt-24 pb-16 text-base-content overflow-x-hidden">
+
+    <section className="min-h-screen pt-24 pb-16 text-base-content overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
+          
           {/* Left side */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">

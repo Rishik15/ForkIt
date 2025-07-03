@@ -14,9 +14,22 @@ export default function Home() {
 
   return (
     <div>
-      <Hero />
-      <HowItWorks />
-      <Footer />
+
+      <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+        
+        <section className="relative min-h-screen snap-start ">
+          <Hero />
+          <a
+            href="#next-section"
+            class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-3xl animate-bounce text-gray-500"
+          >
+            ↓{" "}
+          </a>
+        </section>
+        <section className="min-h-screen snap-start ">
+          <HowItWorks />
+        </section>
+      </div>
     </div>
   );
 }

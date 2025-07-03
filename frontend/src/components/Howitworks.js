@@ -1,30 +1,33 @@
-import React from 'react';
-import { Users, Star, Lightbulb } from 'lucide-react';
+import React from "react";
+import { Users, Star, Lightbulb } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const HowItWorks = () => {
   const steps = [
     {
       icon: Users,
       title: "Create Sessions",
-      description: "Start a new recommendation session and invite your group."
+      description: "Start a new recommendation session and invite your group.",
     },
-     {
+    {
       icon: Lightbulb,
       title: "Get Results",
-      description: "Receive suggestions based on the group's preferences"
+      description: "Receive suggestions based on the group's preferences",
     },
     {
       icon: Star,
       title: "Browse & Rate",
-      description: "Explore recommendations and rate options as group"
-    }   
+      description: "Explore recommendations and rate options as group",
+    },
   ];
 
   return (
-    <section className="py-8 text-base-content">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+    <section className=" h-screen  flex flex-col text-base-content">
+      <div className="flex-1 flex-col justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
+        <div className="text-center mt-20 mb-20">
+          <h2 className="text-4xl font-bold mb-20">How It Works</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -38,7 +41,11 @@ const HowItWorks = () => {
             </div>
           ))}
         </div>
+        
       </div>
+
+      <Footer></Footer>
+
     </section>
   );
 };

@@ -30,7 +30,7 @@ export default function Navbar() {
   }, [user]);
 
   return (
-    <div className="navbar bg-base-100 text-base-content shadow-sm px-4 sm:px-6 lg:px-8">
+    <div className=" navbar  bg-base-100 text-base-content shadow-sm px-4 sm:px-6 lg:px-8">
       {/* Left: Menu Dropdown */}
       <div className="navbar-start  space-x-3">
         <div className="dropdown">
